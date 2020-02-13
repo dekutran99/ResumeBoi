@@ -38,15 +38,13 @@ search_button = driver.find_element_by_class_name('jobs-search-box__submit-butto
 search_button.click()
 
 job_list = driver.find_elements_by_class_name("job-card-search__link-wrapper.js-focusable.disabled.ember-view")
-# job_list = driver.find_elements_by_xpath(nextjob_path)
 
 # deprecated
 for job in job_list:
     job.click()
     driver.execute_script("arguments[0].scrollIntoView();", job )
-    job_list.append(driver.find_element_by_class_name("job-card-search__link-wrapper.js-focusable.disabled.ember-view"))
-
-# driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-# page_bottom = driver.find_element_by_class_name("jobs-search-two-pane__pagination")
-
-# ActionChains(driver).move_to_element(page_bottom).perform()
+    if job == driver.find_elements_by_class_name("job-card-search__link-wrapper.js-focusable.disabled.ember-view")[-1]:
+        break
+    job_list.append(driver.find_elements_by_class_name("job-card-search__link-wrapper.js-focusable.disabled.ember-view")[-1])
+    
+    
